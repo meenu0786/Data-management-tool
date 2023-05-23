@@ -1,0 +1,15 @@
+ .gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .totalRecords {
+    grid-column: span 5;
+  }
+
+  .detail {
+    text-align: right;
+    font-weight: bold;
+    font-size: 20px;
+  }

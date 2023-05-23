@@ -3,10 +3,17 @@ import Dropzone from "react-dropzone";
 import axios from "axios";
 import uploadIcon from "../assets/images/upload.png";
 import classes from "./FileUpload.module.css";
+import DataSummary from "./DataSummary";
 
 const FileUploader = () => {
   const [title, setTitle] = useState("Upload your File (CSV)");
   const [selectedFile, setSelectedFile] = useState("");
+  const [dataSummary, setDataSummary] = useState({
+    totalInsertedRecords: 0,
+    totalDuplicateCSVRecords: 0,
+    totalDuplicateDBRecords: 0,
+  });
+  const [isUploadSuccess, setIsUploadSuccess] = useState(false);
 
   const handleFilesAccepted = (files) => {
     setSelectedFile(files);
@@ -25,8 +32,9 @@ const FileUploader = () => {
               "Access-Control-Allow-Origin": "*",
             },
           });
-
+          setDataSummary({ ...response.data });
           setSelectedFile("");
+          setIsUploadSuccess(true);
           setTitle("Data Upload Summary");
         } catch (error) {
           console.log(error);
@@ -51,7 +59,7 @@ const FileUploader = () => {
           />
         </div>
         <h4 className={classes["dropzone-heading"]}>
-          Drop files here or Click
+          Drop files here or Click to upload
         </h4>
       </div>
     </div>
@@ -65,6 +73,12 @@ const FileUploader = () => {
           renderDropzoneContent(getRootProps, getInputProps)
         }
       </Dropzone>
+      {isUploadSuccess && (
+        <DataSummary
+          totalInsertedRecords={dataSummary.totalInsertedRecords}
+          totalDuplicateDBRecords={dataSummary.totalDuplicateDBRecords}
+        />
+      )}
     </div>
   );
 };
