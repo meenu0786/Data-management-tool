@@ -4,6 +4,7 @@ import axios from "axios";
 import uploadIcon from "../assets/images/upload.png";
 import classes from "./FileUpload.module.css";
 import DataSummary from "./DataSummary";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const FileUploader = () => {
   const [title, setTitle] = useState("Upload your File (CSV)");
@@ -13,6 +14,7 @@ const FileUploader = () => {
     totalDuplicateCSVRecords: 0,
     totalDuplicateDBRecords: 0,
   });
+  const [isUploading, setIsUploading] = useState(false);
   const [isUploadSuccess, setIsUploadSuccess] = useState(false);
 
   const handleFilesAccepted = (files) => {
@@ -22,6 +24,7 @@ const FileUploader = () => {
   useEffect(() => {
     const handleFileUpload = async () => {
       if (selectedFile) {
+        setIsUploading(true);
         setTitle("Uploading...");
         const formData = new FormData();
         formData.append("file", selectedFile[0]);
@@ -33,12 +36,14 @@ const FileUploader = () => {
             },
           });
           setDataSummary({ ...response.data });
+          setIsUploading(false);
           setSelectedFile("");
           setIsUploadSuccess(true);
           setTitle("Data Upload Summary");
         } catch (error) {
           console.log(error);
           setSelectedFile("");
+          setIsUploading(false);
           setTitle("Only CSV files are allowed");
         }
       }
@@ -73,6 +78,7 @@ const FileUploader = () => {
           renderDropzoneContent(getRootProps, getInputProps)
         }
       </Dropzone>
+      {isUploading && <LoadingSpinner />}
       {isUploadSuccess && (
         <DataSummary
           totalInsertedRecords={dataSummary.totalInsertedRecords}
