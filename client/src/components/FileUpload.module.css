@@ -31,3 +31,9 @@
   font-size: 1.25rem;
   font-weight: bold;
 }
+
+.error {
+  color: red;
+  font-size: 20px;
+  font-weight: 500;
+}

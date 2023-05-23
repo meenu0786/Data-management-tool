@@ -16,6 +16,7 @@ const FileUploader = () => {
   });
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadSuccess, setIsUploadSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleFilesAccepted = (files) => {
     setSelectedFile(files);
@@ -42,6 +43,7 @@ const FileUploader = () => {
           setTitle("Data Upload Summary");
         } catch (error) {
           console.log(error);
+          setIsError(true);
           setSelectedFile("");
           setIsUploading(false);
           setTitle("Only CSV files are allowed");
@@ -78,6 +80,7 @@ const FileUploader = () => {
           renderDropzoneContent(getRootProps, getInputProps)
         }
       </Dropzone>
+      {isError && <div className={classes.error}>An error occurred !</div>}
       {isUploading && <LoadingSpinner />}
       {isUploadSuccess && (
         <DataSummary
