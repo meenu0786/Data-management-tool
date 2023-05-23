@@ -1,0 +1,33 @@
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.dropzone-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.dropzone-box {
+  border: 2px dashed #e5e7eb;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone-icon {
+  margin-bottom: 1rem;
+}
+
+.dropzone-icon-image {
+  width: 100px;
+  height: 100px;
+}
+
+.dropzone-heading {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
