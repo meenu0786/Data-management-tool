@@ -1,5 +1,5 @@
 const express = require("express");
-require("./dbConnection");
+require("./db/dbConnection");
 const app = express();
 
 app.use((err, req, res, next) => {
