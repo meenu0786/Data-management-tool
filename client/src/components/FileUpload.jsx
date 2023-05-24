@@ -31,11 +31,15 @@ const FileUploader = () => {
         formData.append("file", selectedFile[0]);
 
         try {
-          const response = await axios.post("", formData, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-            },
-          });
+          const response = await axios.post(
+            "http://localhost:8000/api/upload-data",
+            formData,
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
+            }
+          );
           setDataSummary({ ...response.data });
           setIsUploading(false);
           setSelectedFile("");
@@ -53,6 +57,8 @@ const FileUploader = () => {
 
     handleFileUpload();
   }, [selectedFile]);
+
+  console.log(dataSummary, "dataaa");
 
   const renderDropzoneContent = (getRootProps, getInputProps) => (
     <div className={classes["dropzone-container"]}>

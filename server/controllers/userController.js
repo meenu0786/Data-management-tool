@@ -40,16 +40,16 @@ const uploadCSV = async (req, res) => {
   }
 
   const {
-    totalRecordsInserted,
+    totalInsertedRecords,
 
-    totalDuplicateRecordInDB,
+    totalDuplicateDBRecords,
   } = await uploadAndInsertData(filePath);
 
   return res.status(200).json({
     status: "Data uploaded",
-    totalRecordsInserted,
+    totalInsertedRecords,
 
-    totalDuplicateRecordInDB,
+    totalDuplicateDBRecords,
   });
 };
 
@@ -72,8 +72,8 @@ async function uploadAndInsertData(csvFilePath) {
   fs.unlink(csvFilePath, (err) => {});
 
   return {
-    totalRecordsInserted: recordsInserted,
-    totalDuplicateRecordInDB: duplicateRecordInDB,
+    totalInsertedRecords: recordsInserted,
+    totalDuplicateDBRecords: duplicateRecordInDB,
   };
 }
 
