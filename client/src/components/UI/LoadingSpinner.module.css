@@ -7,7 +7,7 @@
 }
 
 .spinner {
-  border-top: 8px solid #3498db;
+  border-top: 8px solid rgb(65 151 189);
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -15,10 +15,6 @@
   margin-bottom: 16px;
 }
 
-.text {
-  font-size: 18px;
-  font-weight: bold;
-}
 
 @keyframes spin {
   0% {

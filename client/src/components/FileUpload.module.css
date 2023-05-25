@@ -7,15 +7,16 @@
 .dropzone-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  /* align-items: center;
+  height:100vh; */
 }
 
 .dropzone-box {
-  border: 2px dashed #e5e7eb;
+  border: 2px dashed rgb(83 180 222);
   padding: 2rem;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .dropzone-icon {
@@ -25,15 +26,57 @@
 .dropzone-icon-image {
   width: 100px;
   height: 100px;
+  filter: invert(1);
+  padding: 10px 20px;
+  background: sienna;
+  border-radius: 15px;
 }
 
 .dropzone-heading {
-  font-size: 1.25rem;
+  font-size: 21px;
   font-weight: bold;
+  color: #897b7b;
+  margin: 15px;
 }
 
 .error {
   color: red;
   font-size: 20px;
   font-weight: 500;
+}
+.card {
+  width: 500px;
+  padding: 80px;
+  border: 1px solid #ddd;
+  margin: 150px auto;
+  border-radius: 15px;
+  background-color: #f9f9f9;
+  
+}
+@media(max-width: 767px){
+  .card {
+    width: 300px;
+
+  }
+}
+
+.card .title {
+  font-size: 26px;
+  color: rgb(83 180 222);
+  font-family: cursive;
+  margin-bottom: 33px;
+}
+
+.uploadButton {
+  font-family: cursive;
+  margin: 20px;
+  padding: 4px;
+  width: 155px;
+  background: rgb(83 180 222);
+  color: white;
+  border: 6px;
+  border-style: dashed;
+  font-size: 17px;
+  cursor: pointer;
+  margin-left: -14px;
 }

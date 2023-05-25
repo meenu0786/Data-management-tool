@@ -58,8 +58,6 @@ const FileUploader = () => {
     handleFileUpload();
   }, [selectedFile]);
 
-  console.log(dataSummary, "dataaa");
-
   const renderDropzoneContent = (getRootProps, getInputProps) => (
     <div className={classes["dropzone-container"]}>
       <div className={classes["dropzone-box"]} {...getRootProps()}>
@@ -71,22 +69,31 @@ const FileUploader = () => {
             alt="upload csv"
           />
         </div>
-        <h4 className={classes["dropzone-heading"]}>
-          Drop files here or Click to upload
-        </h4>
+        <h4 className={classes["dropzone-heading"]}>Drop your files here</h4>
       </div>
     </div>
   );
 
+  const uploadHandler = () => {
+    setIsUploadSuccess(false);
+    setIsUploading(false);
+    setIsError(false);
+    setTitle("Upload your File (CSV)");
+  };
+
   return (
-    <div>
+    <div className={classes.card}>
       <h4 className={classes.title}>{title}</h4>
-      <Dropzone maxFiles={1} onDrop={handleFilesAccepted}>
-        {({ getRootProps, getInputProps }) =>
-          renderDropzoneContent(getRootProps, getInputProps)
-        }
-      </Dropzone>
-      {isError && <div className={classes.error}>An error occurred !</div>}
+      {!isUploadSuccess && !isUploading && !isError && (
+        <Dropzone maxFiles={1} onDrop={handleFilesAccepted}>
+          {({ getRootProps, getInputProps }) =>
+            renderDropzoneContent(getRootProps, getInputProps)
+          }
+        </Dropzone>
+      )}
+      {isError && !isUploading && !isUploadSuccess && (
+        <div className={classes.error}>An error occurred !</div>
+      )}
       {isUploading && <LoadingSpinner />}
       {isUploadSuccess && (
         <DataSummary
@@ -94,6 +101,9 @@ const FileUploader = () => {
           totalDuplicateDBRecords={dataSummary.totalDuplicateDBRecords}
         />
       )}
+      {isError || isUploading || isUploadSuccess ? (
+        <button className={classes.uploadButton} onClick={uploadHandler}>{isUploading ? 'Cancel Uploading' : `Upload again`}</button>
+      ) : null}
     </div>
   );
 };

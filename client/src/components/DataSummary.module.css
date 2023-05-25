@@ -13,3 +13,14 @@
     font-weight: bold;
     font-size: 20px;
   }
+
+  .chart {
+    margin-left: 95px;
+    margin-top: 15px;
+  }
+@media(max-width: 767px){
+
+  .chart {
+    margin-left: -30px;
+  }
+}
